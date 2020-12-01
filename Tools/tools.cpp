@@ -22,14 +22,28 @@ void Pencil::drawLine(int x1, int y1, int x2, int y2,
         x += dx;
         y += dy;
 
-        if (x > 0 && x < canvas->width && y > 0 && y < canvas->height) {
-            canvas->getPixels()[y][x] = color;
+        if (x >= 0 && x < canvas->width && y >= 0 && y < canvas->height) {
+            drawPoint(x, y, canvas);
+        }
+    }
+}
+
+void Pencil::drawPoint(int x, int y, Canvas* canvas) {
+    for (int xStart = x - thickness; xStart < x + thickness; ++xStart) {
+        for (int yStart = y - thickness;yStart < y + thickness; ++yStart) {
+            if ((xStart - x) * (xStart - x) + 
+                (yStart - y) * (yStart - y) <= thickness * thickness) {
+                    if (xStart >= 0 && xStart < canvas->width && 
+                        yStart >= 0 && yStart < canvas->height) {
+                        canvas->getPixels()[yStart][xStart] = color;
+                    }
+                }
         }
     }
 }
 
 void Pencil::drawStart(Window* canvas, int x, int y) {
-    dynamic_cast<Canvas*>(canvas)->getPixels()[y][x] = color;
+    drawPoint(x, y, dynamic_cast<Canvas*>(canvas));
     lastMovePoint = {-1, -1};
 }
 
@@ -39,7 +53,7 @@ void Pencil::paint(Window* canvas, int x, int y) {
     auto castCanvas = dynamic_cast<Canvas*>(canvas);
 
     if (lastMovePoint == Point(-1, -1)) {
-        castCanvas->getPixels()[y][x] = color;
+        drawPoint(x, y, castCanvas);
         lastMovePoint = {x, y};
     }
     else {

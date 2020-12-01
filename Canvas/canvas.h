@@ -9,7 +9,6 @@ class Canvas: public RectButton {
 private:
     std::vector<std::vector<Color>> pixels;
     bool mousePressed = false;
-    // Point lastMovePoint;
 
 public:
     Canvas(int x, int y, int width, int height, 
