@@ -6,5 +6,12 @@ set(CMAKE_CXX_FLAGS "-pthread")
 
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
-add_executable(graphicEditor main.cpp consts.h Canvas/canvas.cpp Canvas/canvas.h)
+add_executable(graphicEditor main.cpp 
+               consts.h 
+               Canvas/canvas.cpp Canvas/canvas.h 
+               Tools/tools.cpp Tools/tools.h
+               Events/events.cpp Events/events.h
+               Tools/baseTool.h
+               Tools/ToolBar/toolBar.cpp Tools/ToolBar/toolBar.h
+               Tools/ToolManager/toolManager.cpp Tools/ToolManager/toolManager.h)
 target_link_libraries(graphicEditor sfml-graphics sfml-audio "/home/boris/CLionProjects/windowManager/cmake-build-debug/libwindowManager.a")

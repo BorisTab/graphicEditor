@@ -2,25 +2,20 @@
 #define GRAPHICEDITOR_CANVAS_H
 
 #include "../../windowManager/application.h"
-// #include <memory>
+#include "../Tools/ToolManager/toolManager.h"
 
-struct Point {
-    int x = 0;
-    int y = 0;
-
-    Point(int x, int y);
-};
 
 class Canvas: public RectButton {
 private:
     std::vector<std::vector<Color>> pixels;
     bool mousePressed = false;
-    Point lastMovePoint;
+    // Point lastMovePoint;
 
-    void drawLine(int x1, int y1, int x2, int y2, int radius, const Color& color);
 public:
     Canvas(int x, int y, int width, int height, 
            const Color& color, SystemEventSender* systemEventSender);
+
+    std::vector<std::vector<Color>>& getPixels();
 
     void draw(Engine& engine) override;
     

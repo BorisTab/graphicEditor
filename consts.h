@@ -4,9 +4,12 @@
 #include "../windowManager/application.h"
 
 const Color backgroundColor(65, 74, 105);
+const Color canvasColor(255, 255, 255);
+const Color blackColor(0, 0, 0);
+const Color whiteColor(255, 255, 255);
 
 constexpr int windowWidth = 1920;
-constexpr int windowHeight = 1080;
+constexpr int windowHeight = 1080 - 55;
 
 constexpr int canvasHeight = 900;
 constexpr double canvasWidthCoeff = 1.41;
