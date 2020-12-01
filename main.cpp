@@ -9,19 +9,12 @@ int main()
     Application graphicEditor(windowWidth, windowHeight, "Graphic Editor");
     graphicEditor.setBackgroundColor(backgroundColor);
 
-    // RectangleWindow leftLine(canvasStartX - 6, 0, 4, 1080, {38, 34, 34});
-    // graphicEditor.addDrawableObject(&leftLine);
-
-    // RectangleWindow rightLine(canvasStartX + canvasWidthCoeff * canvasHeight + 2,
-    //                           0, 4, 1080, {38, 34, 34});
-    // graphicEditor.addDrawableObject(&rightLine);
-
     Canvas canvas(canvasStartX, canvasStartY, canvasHeight * canvasWidthCoeff,
                   canvasHeight, canvasColor,
                   graphicEditor.getSystemEventManager());
     graphicEditor.addDrawableObject(&canvas);
 
-    ToolBar toolBar(5, 5, canvasStartX - 5 - 5, windowHeight - 10, {38, 34, 34},
+    ToolBar toolBar(5, canvasStartY, canvasStartX - 5 - 5, windowHeight - 10, {38, 34, 34},
                     graphicEditor.getSystemEventManager(), canvasStartX - 5 - 5);
     graphicEditor.addDrawableObject(&toolBar);
 

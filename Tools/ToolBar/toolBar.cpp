@@ -26,14 +26,9 @@ void ToolBar::addTool(const std::string_view& name,
 
 void ToolBar::sendToolNumEvent(std::unique_ptr<Event>& event) {
     int eventNum = 
-        dynamic_cast<ToolButtonClickEvent*>(event.get())->pos / toolSize;
+        (dynamic_cast<ToolButtonClickEvent*>(event.get())->pos - y) / toolSize;
     
     ToolManager::sendToolNum(this, eventNum);
-//     auto toolNumEvent = new ToolNumEvent();
-//     toolNumEvent->toolNum = eventNum;
-
-//     auto uniquePtrEvent = std::unique_ptr<Event>(toolNumEvent);
-//     EventManager::sendEvent(this, uniquePtrEvent);
 }
 
 void ToolBar::getEvent(std::unique_ptr<Event>& event) {
