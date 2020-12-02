@@ -84,7 +84,7 @@ namespace HsvConverter
         }
     }
 
-    void RGBtoHSV(float& fR, float& fG, float fB, float& fH, float& fS, float& fV) {
+    void RGBtoHSV(float fR, float fG, float fB, float fH, float fS, float fV) {
         float fCMax = std::max(std::max(fR, fG), fB);
         float fCMin = std::min(std::min(fR, fG), fB);
         float fDelta = fCMax - fCMin;

@@ -2,12 +2,7 @@
 
 Canvas::Canvas(int x, int y, int width, int height, 
                const Color &color, SystemEventSender* systemEventSender):
-    RectButton(x, y, width, height, color, systemEventSender),
-    pixels(height, std::vector<Color>(width, color)) {}
-
-void Canvas::draw(Engine &engine) {
-    engine.drawPixels(x, y, pixels);
-}
+    RectPixelButton(x, y, width, height, color, systemEventSender) {}
 
 void Canvas::onLeftClick(std::unique_ptr<Event>& event) {
     int clickX = dynamic_cast<MouseEvent*>(event.get())->x;
@@ -30,8 +25,4 @@ void Canvas::getEvent(std::unique_ptr<Event> &event) {
     }
 
     RectButton::getEvent(event);
-}
-
-std::vector<std::vector<Color>>& Canvas::getPixels() {
-    return pixels;
 }

@@ -3,7 +3,7 @@
 Color Hsv::hsvToColor(uint16_t hue, uint8_t saturation, uint8_t value) {
     Color color;
 
-    HsvConverter::getRgbFromHSV(hue, saturation, value, &color.r, &color.g, color.b);
+    HsvConverter::getRgbFromHSV(hue, saturation, value, color.r, color.g, color.b);
     return color;
 }
 

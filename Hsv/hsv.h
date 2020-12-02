@@ -2,13 +2,9 @@
 #define HSV_GRAPHICEDITOR_H
 
 #include "../../windowManager/application.h"
-#include "HsvConveter/hsvConverter.h"
+#include "HsvConverter/hsvConverter.h"
 
 namespace Hsv {
-    constexpr int hueMax = 1529;
-    Color hsvToColor(uint16_t hue, uint8_t saturation, uint8_t value);
-    HsvColor ColorToHsv(const Color& color);
-
     struct HsvColor {
         int h = 0;
         int s = 0;
@@ -17,6 +13,10 @@ namespace Hsv {
         HsvColor() = default;
         HsvColor(int h, int s, int v);
     };
+    
+    constexpr int hueMax = 1529;
+    Color hsvToColor(uint16_t hue, uint8_t saturation, uint8_t value);
+    HsvColor ColorToHsv(const Color& color);
 };
 
 #endif

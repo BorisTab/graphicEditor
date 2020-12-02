@@ -3,6 +3,7 @@
 #include "Canvas/canvas.h"
 #include "Tools/ToolBar/toolBar.h"
 #include "Tools/tools.h"
+#include "ColorPicker/colorPicker.h"
 
 int main()
 {
@@ -14,7 +15,7 @@ int main()
                   graphicEditor.getSystemEventManager());
     graphicEditor.addDrawableObject(&canvas);
 
-    ToolBar toolBar(5, canvasStartY, canvasStartX - 5 - 5, windowHeight - 10, {38, 34, 34},
+    ToolBar toolBar(5, canvasStartY, canvasStartX - 5 - 5, windowHeight - canvasStartY - 5, {38, 34, 34},
                     graphicEditor.getSystemEventManager(), canvasStartX - 5 - 5);
     graphicEditor.addDrawableObject(&toolBar);
 
@@ -33,6 +34,20 @@ int main()
                                          whiteColor,
                                          "");
     ToolManager::setActiveTool(&pencil);
+
+    RectangleWindow colorPicker(1400, canvasStartY, 
+                                50 + 250 + 30 + 25, 300, {38, 34, 34});
+    graphicEditor.addDrawableObject(&colorPicker);
+
+    ColorPickerHue colorPickerHue(1700, canvasStartY + 25, 
+                                  30, 250, whiteColor,
+                                  graphicEditor.getSystemEventManager());
+    colorPicker.addSubWindow(&colorPickerHue);
+
+    ColorPickerSV colorPickerSV(1425, canvasStartY + 25, 
+                                  250, 250, whiteColor,
+                                  graphicEditor.getSystemEventManager());
+    colorPicker.addSubWindow(&colorPickerSV);
 
     graphicEditor.run();
     return 0;
