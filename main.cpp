@@ -40,6 +40,7 @@ int main()
                             graphicEditor.getSystemEventManager());
     graphicEditor.addDrawableObject(&colorPicker);
 
+    
     graphicEditor.run();
     return 0;
 }

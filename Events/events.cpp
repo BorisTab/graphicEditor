@@ -15,3 +15,11 @@ ChangeHueColorEvent::ChangeHueColorEvent() {
 ChangeSVColorEvent::ChangeSVColorEvent() {
     type = ColorSVChanged;
 }
+
+SliderChangePosEvent::SliderChangePosEvent() {
+    type = SliderChangePosition;
+}
+
+PointerChangePosEvent::PointerChangePosEvent() {
+    type = PointerChangePosition;
+}

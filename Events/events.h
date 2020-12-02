@@ -8,7 +8,9 @@ struct EditorEvent: public Event {
         ToolButtonClicked = Event::UserEvent,
         ToolNumSend,
         ColorHueChanged,
-        ColorSVChanged
+        ColorSVChanged,
+        SliderChangePosition,
+        PointerChangePosition
     }; 
 };
 
@@ -24,16 +26,30 @@ struct ToolNumEvent: public EditorEvent {
     ToolNumEvent();
 };
 
-struct ChangeHueColorEvent: EditorEvent {
+struct ChangeHueColorEvent: public EditorEvent {
     int hue = 0;
 
     ChangeHueColorEvent();
 };
-struct ChangeSVColorEvent: EditorEvent {
+struct ChangeSVColorEvent: public EditorEvent {
     int saturation = 0;
     int value = 0;
 
     ChangeSVColorEvent();
+};
+
+struct SliderChangePosEvent: public EditorEvent {
+    int posX = 0;
+    int posY = 0;
+
+    SliderChangePosEvent();
+};
+
+struct PointerChangePosEvent: public SliderChangePosEvent {
+    int posX = 0;
+    int posY = 0;
+
+    PointerChangePosEvent();
 };
 
 #endif
