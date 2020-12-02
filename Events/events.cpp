@@ -7,3 +7,11 @@ ToolButtonClickEvent::ToolButtonClickEvent() {
 ToolNumEvent::ToolNumEvent() {
     type = ToolNumSend;
 }
+
+ChangeHueColorEvent::ChangeHueColorEvent() {
+    type = ColorHueChanged;
+}
+
+ChangeSVColorEvent::ChangeSVColorEvent() {
+    type = ColorSVChanged;
+}

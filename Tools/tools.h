@@ -5,7 +5,7 @@
 #include "../Canvas/canvas.h"
 
 class Pencil: public Tool {
-private:
+protected:
     Color color;
     int thickness = 0;
     Point lastMovePoint;
@@ -16,14 +16,20 @@ private:
 public:
     Pencil(const Color& color, int thickness);
 
+    void setUp() override; 
     void drawStart(Window* canvas, int x, int y) override;
     void drawEnd(Window* canvas, int x, int y) override;
     void paint(Window* canvas, int x, int y) override;
+
+    void setColor(const Color& newColor);
+    void setThickness(int newThickness);
 };
 
 class Eraser: public Pencil {
 public:
     Eraser(const Color& color, int thickness);
+
+    void drawStart(Window* canvas, int x, int y) override;
 };
 
 #endif //GRAPHICEDITOR_TOOLS_H

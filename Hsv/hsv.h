@@ -16,6 +16,7 @@ namespace Hsv {
     
     constexpr int hueMax = 1529;
     Color hsvToColor(uint16_t hue, uint8_t saturation, uint8_t value);
+    Color hsvToColor(const HsvColor& hsvColor);
     HsvColor ColorToHsv(const Color& color);
 };
 

@@ -7,6 +7,10 @@ Color Hsv::hsvToColor(uint16_t hue, uint8_t saturation, uint8_t value) {
     return color;
 }
 
+Color Hsv::hsvToColor(const HsvColor& hsvColor) {
+    return hsvToColor(hsvColor.h, hsvColor.s, hsvColor.v);
+}
+
 Hsv::HsvColor Hsv::ColorToHsv(const Color& color) {
     Hsv::HsvColor hsvColor;
     HsvConverter::RGBtoHSV(color.r, color.g, color.b, 

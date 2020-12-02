@@ -5,6 +5,11 @@ Pencil::Pencil(const Color& color, int thickness):
     thickness(thickness),
     lastMovePoint(-1, -1) {}
 
+void Pencil::setUp() {
+    ToolManager::changeColor(color);
+    ToolManager::changeThickness(thickness);
+}
+
 void Pencil::drawLine(int x1, int y1, int x2, int y2, 
                       Canvas* canvas) {
     int leftX = std::min(x1, x2);
@@ -43,6 +48,7 @@ void Pencil::drawPoint(int x, int y, Canvas* canvas) {
 }
 
 void Pencil::drawStart(Window* canvas, int x, int y) {
+    color = ToolManager::getColor();
     drawPoint(x, y, dynamic_cast<Canvas*>(canvas));
     lastMovePoint = {-1, -1};
 }
@@ -62,6 +68,18 @@ void Pencil::paint(Window* canvas, int x, int y) {
     }
 }
 
+void Pencil::setColor(const Color& newColor) {
+    color = newColor;
+}
+void Pencil::setThickness(int newThickness) {
+    thickness = newThickness;
+}
+
 
 Eraser::Eraser(const Color& color, int thickness):
     Pencil(color, thickness) {}
+
+void Eraser::drawStart(Window* canvas, int x, int y) {
+    drawPoint(x, y, dynamic_cast<Canvas*>(canvas));
+    lastMovePoint = {-1, -1};
+}

@@ -8,6 +8,8 @@ const Color canvasColor(255, 255, 255);
 const Color blackColor(0, 0, 0);
 const Color whiteColor(255, 255, 255);
 
+const Color darkGrey(38, 34, 34);
+
 constexpr int windowWidth = 1920;
 constexpr int windowHeight = 1080 - 55;
 
