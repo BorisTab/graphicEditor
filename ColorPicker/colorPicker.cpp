@@ -9,8 +9,11 @@ ColorPickerHue::ColorPickerHue(int x, int y, int width, int height,
            y, y + height, true) {
     
     addSubWindow(&slider);
+
+    EventManager::addSender(this);
     EventManager::addSender(&slider);
     EventManager::addListener(&slider, this);
+    EventManager::addListener(this, &slider);
     
     for (int yStart = 0; yStart < height; ++yStart) {
         int hueVal = Hsv::hueMax * yStart / height;
@@ -33,7 +36,6 @@ void ColorPickerHue::sendHue(int clickY) {
 void ColorPickerHue::sendPos(int x, int y) {
     auto sliderChangePos = new SliderChangePosEvent;
     sliderChangePos->posY = y;
-    // sliderChangePos->posX = 2000;
 
     auto uniquePtrEvent = std::unique_ptr<Event>(sliderChangePos);
     EventManager::sendEvent(this, uniquePtrEvent);
@@ -65,7 +67,9 @@ ColorPickerSV::ColorPickerSV(int x, int y, int width, int height,
     
     addSubWindow(&pointer);
     EventManager::addSender(&pointer);
+    EventManager::addSender(this);
     EventManager::addListener(&pointer, this);
+    EventManager::addListener(this, &pointer);
 
     changePalette(0);
 }
@@ -83,19 +87,20 @@ void ColorPickerSV::changePalette(int hue) {
 }
 
 void ColorPickerSV::pointerMovedHandler(std::unique_ptr<Event>& event) {
-    auto pointerEvent = dynamic_cast<SliderMoveEvent*>(event.get());
+    auto pointerEvent = dynamic_cast<PointerMoveEvent*>(event.get());
     double valY = pointerEvent->yValue;
     double valX = pointerEvent->xValue;
 
-    int clickX = valX * width + x;
-    int clickY = valY * height + y;
+    sendSV(valX * width + x, valY * height + y);
+//     int clickX = valX * width + x;
+//     int clickY = valY * height + y;
 
-    auto mouseEvent = new MouseEvent;
-    mouseEvent->x = clickX;
-    mouseEvent->y = clickY;
+//     auto mouseEvent = new MouseEvent;
+//     mouseEvent->x = clickX;
+//     mouseEvent->y = clickY;
 
-    auto uniquePtrEvent = std::unique_ptr<Event>(mouseEvent);
-    onLeftClick(uniquePtrEvent);
+//     auto uniquePtrEvent = std::unique_ptr<Event>(mouseEvent);
+//     onLeftClick(uniquePtrEvent);
 }
 
 void ColorPickerSV::getEvent(std::unique_ptr<Event>& event) {
@@ -103,7 +108,7 @@ void ColorPickerSV::getEvent(std::unique_ptr<Event>& event) {
     case EditorEvent::ColorHueChanged:
         changeHueEventHandler(event);
         break;
-    case EditorEvent::SliderMoved:
+    case EditorEvent::PointerMoved:
         pointerMovedHandler(event);
         break;
     default:
@@ -123,13 +128,17 @@ void ColorPickerSV::onLeftClick(std::unique_ptr<Event>& event) {
     int clickX = dynamic_cast<MouseEvent*>(event.get())->x;
     int clickY = dynamic_cast<MouseEvent*>(event.get())->y;
 
+    sendSV(clickX, clickY);
+    sendPos(clickX, clickY);
+}
+
+void ColorPickerSV::sendSV(int clickX, int clickY) {
     auto colorSVEvent = new ChangeSVColorEvent;
     colorSVEvent->saturation = 255 * (clickX - x) / width;
     colorSVEvent->value = 255 * (height - clickY + y) / height;
 
     auto uniquePtrEvent = std::unique_ptr<Event>(colorSVEvent);
     EventManager::sendEvent(this, uniquePtrEvent);
-    sendPos(clickX, clickY);
 }
 
 void ColorPickerSV::onLeftUnclick(std::unique_ptr<Event>& event) {}
@@ -155,8 +164,8 @@ ColorPicker::ColorPicker(int x, int y, int width, int height,
     addSubWindow(&colorPickerHue);
     addSubWindow(&colorPickerSV);
 
-    EventManager::addSender(&colorPickerHue);
-    EventManager::addSender(&colorPickerSV);
+    // EventManager::addSender(&colorPickerHue);
+    // EventManager::addSender(&colorPickerSV);
 
     EventManager::addListener(&colorPickerHue, &colorPickerSV);
     EventManager::addListener(&colorPickerHue, this);
@@ -205,15 +214,16 @@ HueSlider::HueSlider(int x, int y, int width, int height,
            minPos, maxPos, vertical) {}
 
 void HueSlider::getEvent(std::unique_ptr<Event>& event) {
+    Slider::getEvent(event);
+    
     if (EditorEvent::SliderChangePosition == event->type) {
+        mousePressed = true;
         auto mouseEvent = new MouseEvent;
         mouseEvent->y = dynamic_cast<SliderChangePosEvent*>(event.get())->posY;
 
         auto uniquePtrEvent = std::unique_ptr<Event>(mouseEvent);
         onMouseMove(uniquePtrEvent);
     }
-
-    Slider::getEvent(event);
 }
 
 SVPointer::SVPointer(int x, int y, int width, int height,
@@ -225,7 +235,10 @@ SVPointer::SVPointer(int x, int y, int width, int height,
             minX, maxX, minY, maxY) {}
 
 void SVPointer::getEvent(std::unique_ptr<Event>& event) {
+    Pointer::getEvent(event);
+    
     if (EditorEvent::PointerChangePosition == event->type) {
+        mousePressed = true;
         auto getEvent = dynamic_cast<PointerChangePosEvent*>(event.get());
 
         auto mouseEvent = new MouseEvent;
@@ -235,16 +248,13 @@ void SVPointer::getEvent(std::unique_ptr<Event>& event) {
         auto uniquePtrEvent = std::unique_ptr<Event>(mouseEvent);
         onMouseMove(uniquePtrEvent);
     }
-
-    Pointer::getEvent(event);
 }
 
 void ColorPickerSV::sendPos(int x, int y) {
-    auto sliderChangePos = new PointerChangePosEvent;
-    sliderChangePos->posY = y;
-    sliderChangePos->posX = x;
-    // sliderChangePos->posX = 2000;
+    auto pointerChangePos = new PointerChangePosEvent;
+    pointerChangePos->posY = y;
+    pointerChangePos->posX = x;
 
-    auto uniquePtrEvent = std::unique_ptr<Event>(sliderChangePos);
+    auto uniquePtrEvent = std::unique_ptr<Event>(pointerChangePos);
     EventManager::sendEvent(this, uniquePtrEvent);
 }

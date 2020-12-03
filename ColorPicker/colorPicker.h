@@ -63,6 +63,7 @@ public:
     void getEvent(std::unique_ptr<Event>& event) override;
 
     void changePalette(int hue);
+    void sendSV(int clickX, int clickY);
     void sendPos(int x, int y);
 };
 

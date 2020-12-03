@@ -45,7 +45,7 @@ struct SliderChangePosEvent: public EditorEvent {
     SliderChangePosEvent();
 };
 
-struct PointerChangePosEvent: public SliderChangePosEvent {
+struct PointerChangePosEvent: public EditorEvent {
     int posX = 0;
     int posY = 0;
 
