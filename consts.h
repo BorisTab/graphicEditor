@@ -3,11 +3,10 @@
 
 #include "../windowManager/application.h"
 
-const Color backgroundColor(65, 74, 105);
+const Color darkBlue(65, 74, 105);
 const Color canvasColor(255, 255, 255);
 const Color blackColor(0, 0, 0);
 const Color whiteColor(255, 255, 255);
-
 const Color darkGrey(38, 34, 34);
 const Color lightGrey(187, 187, 187);
 

@@ -5,17 +5,24 @@
 #include "Tools/tools.h"
 #include "ColorPicker/colorPicker.h"
 #include "VisualOptions/thickSlider/thickSlider.h"
+#include "TopMenu/topMenu.h"
 
 int main() {
     Application graphicEditor(windowWidth - 10, windowHeight, "Graphic Editor");
-    graphicEditor.setBackgroundColor(backgroundColor);
+    graphicEditor.setBackgroundColor(darkBlue);
 
-    graphicEditor.loadImageFromFile("/home/boris/CLionProjects/graphicEditor/img/pen.png", "penIcon");
-    graphicEditor.loadImageFromFile("/home/boris/CLionProjects/graphicEditor/img/eraser.png", "eraserIcon");
+    graphicEditor.loadImageFromFile("/home/boris/CLionProjects/graphicEditor/img/pen.png", 
+                                    "penIcon");
+    graphicEditor.loadImageFromFile("/home/boris/CLionProjects/graphicEditor/img/eraser.png", 
+                                    "eraserIcon");
+    
+    graphicEditor.loadFontFromFile("/home/boris/CLionProjects/graphicEditor/fonts/JosefinSans-Regular.ttf", 
+                                   "JosefinSans");
 
     Canvas canvas(canvasStartX, canvasStartY, canvasHeight * canvasWidthCoeff,
                   canvasHeight, canvasColor,
                   graphicEditor.getSystemEventManager());
+    EventManager::addListener(&canvas, &graphicEditor);
     graphicEditor.addDrawableObject(&canvas);
 
     ToolBar toolBar(5, canvasStartY, canvasStartX - 5 - 5, windowHeight - canvasStartY - 5, darkGrey,
@@ -50,6 +57,11 @@ int main() {
     thicknessSlider.setRailColor(darkGrey);
     thicknessSlider.setThicknessRange(1, 30);
     graphicEditor.addDrawableObject(&thicknessSlider);
+
+    TopMenu topMenu(0, 0, windowWidth, 20, darkGrey, 
+                    graphicEditor.getSystemEventManager(), lightGrey);
+    EventManager::addListener(&topMenu, &canvas);
+    graphicEditor.addDrawableObject(&topMenu);
 
     graphicEditor.run();
     return 0;

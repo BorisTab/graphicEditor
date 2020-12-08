@@ -11,7 +11,8 @@ struct EditorEvent: public Event {
         ColorHueChanged,
         ColorSVChanged,
         SliderChangePosition,
-        PointerChangePosition
+        PointerChangePosition,
+        SaveButtonClicked
     }; 
 };
 
@@ -55,6 +56,10 @@ struct PointerChangePosEvent: public EditorEvent {
     int posY = 0;
 
     PointerChangePosEvent();
+};
+
+struct SaveButtonClickEvent: public EditorEvent {
+    SaveButtonClickEvent();
 };
 
 #endif

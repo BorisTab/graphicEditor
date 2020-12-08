@@ -27,3 +27,7 @@ SliderChangePosEvent::SliderChangePosEvent() {
 PointerChangePosEvent::PointerChangePosEvent() {
     type = PointerChangePosition;
 }
+
+SaveButtonClickEvent::SaveButtonClickEvent() {
+    type = SaveButtonClicked;
+}
