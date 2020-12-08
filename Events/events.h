@@ -6,6 +6,7 @@
 struct EditorEvent: public Event {
     enum EditorEventType {
         ToolButtonClicked = Event::UserEvent,
+        ToolButtonChangeColor,
         ToolNumSend,
         ColorHueChanged,
         ColorSVChanged,
@@ -18,6 +19,10 @@ struct ToolButtonClickEvent: public EditorEvent {
     int pos = 0;
 
     ToolButtonClickEvent();
+};
+
+struct ToolButtonChangeColorEvent: public EditorEvent {
+    ToolButtonChangeColorEvent();
 };
 
 struct ToolNumEvent: public EditorEvent {

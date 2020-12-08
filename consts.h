@@ -9,6 +9,7 @@ const Color blackColor(0, 0, 0);
 const Color whiteColor(255, 255, 255);
 
 const Color darkGrey(38, 34, 34);
+const Color lightGrey(187, 187, 187);
 
 constexpr int windowWidth = 1915;
 constexpr int windowHeight = 1080 - 55;

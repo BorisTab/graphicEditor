@@ -9,15 +9,18 @@ class ToolBar: public RectangleWindow {
 private:
     int toolSize = 40;
     int toolNum = 0;
+    Color activeToolColor;
     SystemEventSender* systemEventSender;
 
     void sendToolNumEvent(std::unique_ptr<Event>& event);
+    void sendToolButtonChangeColorEvent(std::unique_ptr<Event>& event);
 
 public:
     ToolBar(int x, int y, int width, int height, 
             const Color& color, 
             SystemEventSender* systemEventSender,
-            int toolIconSize);
+            int toolIconSize, 
+            const Color& activeToolColor);
 
     void addTool(const std::string_view& name, 
                  const Color& color,
@@ -27,14 +30,20 @@ public:
 };
 
 class ToolButton: public RectButton {
+private:
+    Color pressedColor;
+    Color defaultColor;
 public:
     ToolButton(int x, int y, int width, int height, 
                const Color& color, 
                SystemEventSender* systemEventSender,
-               const std::string& iconName);
+               const std::string& iconName,
+               const Color& pressedColor);
 
     void onLeftClick(std::unique_ptr<Event>& event) override;
     void onLeftUnclick(std::unique_ptr<Event>& event) override;
+
+    void getEvent(std::unique_ptr<Event>& event) override;
 };
 
 class ToolBarInitializer {

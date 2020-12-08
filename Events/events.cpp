@@ -4,6 +4,10 @@ ToolButtonClickEvent::ToolButtonClickEvent() {
     type = ToolButtonClicked;
 }
 
+ToolButtonChangeColorEvent::ToolButtonChangeColorEvent() {
+    type = ToolButtonChangeColor;
+}
+
 ToolNumEvent::ToolNumEvent() {
     type = ToolNumSend;
 }

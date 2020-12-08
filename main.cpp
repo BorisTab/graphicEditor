@@ -19,7 +19,9 @@ int main() {
     graphicEditor.addDrawableObject(&canvas);
 
     ToolBar toolBar(5, canvasStartY, canvasStartX - 5 - 5, windowHeight - canvasStartY - 5, darkGrey,
-                    graphicEditor.getSystemEventManager(), canvasStartX - 5 - 5);
+                    graphicEditor.getSystemEventManager(), 
+                    canvasStartX - 5 - 5, 
+                    lightGrey);
     graphicEditor.addDrawableObject(&toolBar);
 
     Pencil pencil(blackColor, 10);
