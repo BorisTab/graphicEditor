@@ -11,7 +11,7 @@ ColorPickerHue::ColorPickerHue(int x, int y, int width, int height,
     addSubWindow(&slider);
 
     EventManager::addSender(this);
-    EventManager::addSender(&slider);
+    // EventManager::addSender(&slider);
     EventManager::addListener(&slider, this);
     EventManager::addListener(this, &slider);
     
@@ -92,15 +92,6 @@ void ColorPickerSV::pointerMovedHandler(std::unique_ptr<Event>& event) {
     double valX = pointerEvent->xValue;
 
     sendSV(valX * width + x, valY * height + y);
-//     int clickX = valX * width + x;
-//     int clickY = valY * height + y;
-
-//     auto mouseEvent = new MouseEvent;
-//     mouseEvent->x = clickX;
-//     mouseEvent->y = clickY;
-
-//     auto uniquePtrEvent = std::unique_ptr<Event>(mouseEvent);
-//     onLeftClick(uniquePtrEvent);
 }
 
 void ColorPickerSV::getEvent(std::unique_ptr<Event>& event) {

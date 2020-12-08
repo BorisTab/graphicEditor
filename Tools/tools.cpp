@@ -49,6 +49,8 @@ void Pencil::drawPoint(int x, int y, Canvas* canvas) {
 
 void Pencil::drawStart(Window* canvas, int x, int y) {
     color = ToolManager::getColor();
+    thickness = ToolManager::getThickness();
+
     drawPoint(x, y, dynamic_cast<Canvas*>(canvas));
     lastMovePoint = {-1, -1};
 }
@@ -80,6 +82,8 @@ Eraser::Eraser(const Color& color, int thickness):
     Pencil(color, thickness) {}
 
 void Eraser::drawStart(Window* canvas, int x, int y) {
+    thickness = ToolManager::getThickness();
+    
     drawPoint(x, y, dynamic_cast<Canvas*>(canvas));
     lastMovePoint = {-1, -1};
 }

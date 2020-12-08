@@ -37,3 +37,7 @@ void ToolManager::changeThickness(int thickness) {
 Color& ToolManager::getColor() {
     return activeColor;
 }
+
+int ToolManager::getThickness() {
+    return activeThickness;
+}

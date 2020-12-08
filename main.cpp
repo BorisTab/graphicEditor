@@ -4,10 +4,10 @@
 #include "Tools/ToolBar/toolBar.h"
 #include "Tools/tools.h"
 #include "ColorPicker/colorPicker.h"
+#include "VisualOptions/thickSlider/thickSlider.h"
 
-int main()
-{
-    Application graphicEditor(windowWidth, windowHeight, "Graphic Editor");
+int main() {
+    Application graphicEditor(windowWidth - 10, windowHeight, "Graphic Editor");
     graphicEditor.setBackgroundColor(backgroundColor);
 
     Canvas canvas(canvasStartX, canvasStartY, canvasHeight * canvasWidthCoeff,
@@ -40,7 +40,12 @@ int main()
                             graphicEditor.getSystemEventManager());
     graphicEditor.addDrawableObject(&colorPicker);
 
-    
+    ThickSliderContainer thicknessSlider(1500, canvasStartY + 300 + 20, 6, 40, whiteColor, 
+                                graphicEditor.getSystemEventManager(), 1400, 1400 + 355);
+    thicknessSlider.setRailColor(darkGrey);
+    thicknessSlider.setThicknessRange(1, 30);
+    graphicEditor.addDrawableObject(&thicknessSlider);
+
     graphicEditor.run();
     return 0;
 }

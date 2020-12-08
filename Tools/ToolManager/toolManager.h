@@ -24,6 +24,7 @@ public:
     static void changeColor(const Color& color);
     static void changeThickness(int thickness);
     static Color& getColor();
+    static int getThickness();
 };
 
 #endif
