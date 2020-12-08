@@ -13,10 +13,12 @@ ToolBar::ToolBar(int x, int y, int width, int height,
 
 void ToolBar::addTool(const std::string_view& name,
                       const Color& color,
-                      const std::string_view& iconPath) {
+                      const std::string& iconName) {
     
     subWindows.push_back(new ToolButton(x + 5, y + toolNum * toolSize + 5, 
-                         toolSize - 10, toolSize - 10, color, systemEventSender));
+                         toolSize - 10, toolSize - 10, 
+                         color, systemEventSender,
+                         iconName));
 
     EventManager::addSender(subWindows.back());
     EventManager::addListener(subWindows.back(), this);
@@ -45,8 +47,10 @@ void ToolBar::getEvent(std::unique_ptr<Event>& event) {
 
 ToolButton::ToolButton(int x, int y, int width, int height, 
             const Color& color, 
-            SystemEventSender* systemEventSender): 
-            RectButton(x, y, width, height, color, systemEventSender) {}
+            SystemEventSender* systemEventSender, 
+            const std::string& iconName): 
+    RectButton(x, y, width, height, color, 
+               systemEventSender, iconName) {}
 
 void ToolButton::onLeftClick(std::unique_ptr<Event>& event) {
     auto toolButtonEvent = new ToolButtonClickEvent;
@@ -63,8 +67,8 @@ void ToolBarInitializer::addToolToToolBar(
                 ToolBar* toolBar, Tool* tool, 
                 const std::string_view& name, 
                 const Color& color,
-                const std::string_view& iconPath) {
+                const std::string& iconName) {
     
-    toolBar->addTool(name, color, iconPath);
+    toolBar->addTool(name, color, iconName);
     ToolManager::addTool(toolBar, tool);
 }

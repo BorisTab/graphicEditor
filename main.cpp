@@ -10,6 +10,9 @@ int main() {
     Application graphicEditor(windowWidth - 10, windowHeight, "Graphic Editor");
     graphicEditor.setBackgroundColor(backgroundColor);
 
+    graphicEditor.loadImageFromFile("/home/boris/CLionProjects/graphicEditor/img/pen.png", "penIcon");
+    graphicEditor.loadImageFromFile("/home/boris/CLionProjects/graphicEditor/img/eraser.png", "eraserIcon");
+
     Canvas canvas(canvasStartX, canvasStartY, canvasHeight * canvasWidthCoeff,
                   canvasHeight, canvasColor,
                   graphicEditor.getSystemEventManager());
@@ -26,13 +29,13 @@ int main() {
                                          &pencil,
                                          "Pencil",
                                          whiteColor,
-                                         "");
+                                         "penIcon");
 
     ToolBarInitializer::addToolToToolBar(&toolBar,
                                          &eraser,
                                          "Eraser",
                                          whiteColor,
-                                         "");
+                                         "eraserIcon");
     ToolManager::setActiveTool(&pencil);
 
     ColorPicker colorPicker(1400, canvasStartY, 355, 300, darkGrey,

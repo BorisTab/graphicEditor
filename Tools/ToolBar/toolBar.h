@@ -21,7 +21,7 @@ public:
 
     void addTool(const std::string_view& name, 
                  const Color& color,
-                 const std::string_view& iconPath);
+                 const std::string& iconName);
 
     void getEvent(std::unique_ptr<Event>& event) override;
 };
@@ -30,7 +30,8 @@ class ToolButton: public RectButton {
 public:
     ToolButton(int x, int y, int width, int height, 
                const Color& color, 
-               SystemEventSender* systemEventSender);
+               SystemEventSender* systemEventSender,
+               const std::string& iconName);
 
     void onLeftClick(std::unique_ptr<Event>& event) override;
     void onLeftUnclick(std::unique_ptr<Event>& event) override;
@@ -44,7 +45,7 @@ public:
                 ToolBar* toolBar, Tool* tool, 
                 const std::string_view& name, 
                 const Color& color,
-                const std::string_view& iconPath);
+                const std::string& iconName = "");
 };
 
 #endif
