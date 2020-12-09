@@ -6,6 +6,7 @@
 #include "ColorPicker/colorPicker.h"
 #include "VisualOptions/thickSlider/thickSlider.h"
 #include "TopMenu/topMenu.h"
+#include "PluginManager/pluginManager.h"
 
 int main() {
     Application graphicEditor(windowWidth - 10, windowHeight, "Graphic Editor");
@@ -62,6 +63,10 @@ int main() {
                     graphicEditor.getSystemEventManager(), lightGrey);
     EventManager::addListener(&topMenu, &canvas);
     graphicEditor.addDrawableObject(&topMenu);
+
+
+    PluginManager::addPlugins("/home/boris/CLionProjects/graphicEditor/Plugins");
+
 
     graphicEditor.run();
     return 0;
