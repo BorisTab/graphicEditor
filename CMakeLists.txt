@@ -19,6 +19,11 @@ add_executable(graphicEditor main.cpp
                ColorPicker/colorPicker.cpp ColorPicker/colorPicker.h
                VisualOptions/thickSlider/thickSlider.cpp VisualOptions/thickSlider/thickSlider.h
                TopMenu/topMenu.cpp TopMenu/topMenu.h
-               PluginManager/pluginManager.cpp PluginManager/pluginManager.h)
+               PluginManager/pluginManager.cpp PluginManager/pluginManager.h
+               Tools/PluginsTools/pluginsTools.cpp Tools/PluginsTools/pluginsTools.h)
                
-target_link_libraries(graphicEditor sfml-graphics sfml-audio "/home/boris/CLionProjects/windowManager/cmake-build-debug/libwindowManager.a")
+target_link_libraries(graphicEditor 
+                      sfml-graphics 
+                      sfml-audio 
+                      "/home/boris/CLionProjects/windowManager/cmake-build-debug/libwindowManager.a"
+                      ${CMAKE_DL_LIBS})

@@ -3,7 +3,7 @@
 
 #include "../baseTool.h"
 #include "pluginsApi.h"
-#include "../Canvas/canvas.h"
+#include "../../Canvas/canvas.h"
 
 class PlugTool: public Tool {
 private:

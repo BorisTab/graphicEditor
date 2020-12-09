@@ -65,9 +65,11 @@ int main() {
     graphicEditor.addDrawableObject(&topMenu);
 
 
-    PluginManager::addPlugins("/home/boris/CLionProjects/graphicEditor/Plugins");
+    PluginManager::addPlugins("/home/boris/CLionProjects/graphicEditor/Plugins", 
+                              graphicEditor, toolBar);
 
 
     graphicEditor.run();
+    PluginManager::closeAllPlugins();
     return 0;
 }
